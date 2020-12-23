@@ -10,6 +10,8 @@ import (
 	"github.com/tuanito/go-deribit/v3/client/market_data"
 	"github.com/tuanito/go-deribit/v3/client/private"
 	"github.com/tuanito/go-deribit/v3/client/public"
+	"github.com/tuanito/go-deribit/v3/structures/account"
+	"github.com/tuanito/go-deribit/v3/structures/instrument"
 )
 
 func main() {
@@ -52,21 +54,23 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error getting account accountSummary: %s", err)
 	}
-	fmt.Printf("Currency: %s\n", *accountSummary.Payload.Result.Currency)
-	fmt.Printf("Available funds: %f\n", *accountSummary.Payload.Result.AvailableFunds)
-	fmt.Printf("Balance : %f\n", *accountSummary.Payload.Result.Balance)
-	fmt.Printf("Equity : %f\n", *accountSummary.Payload.Result.Equity)
-	fmt.Printf("Delta Total: %f\n", *accountSummary.Payload.Result.DeltaTotal)
-	fmt.Printf("Options Delta: %f\n", *accountSummary.Payload.Result.OptionsDelta)
-	fmt.Printf("Options Gamma: %f\n", *accountSummary.Payload.Result.OptionsGamma)
-	fmt.Printf("Options Vega: %f\n", *accountSummary.Payload.Result.OptionsVega)
-	fmt.Printf("Options Theta: %f\n", *accountSummary.Payload.Result.OptionsTheta)
-	// fmt.Printf("Session funding: %f\n", *accountSummary.Payload.Result.SessionFunding)
-	fmt.Printf("Futures PnL: %f\n", *accountSummary.Payload.Result.FuturesPl)
-	fmt.Printf("Options PnL: %f\n", *accountSummary.Payload.Result.OptionsPl)
-	fmt.Printf("Total PnL: %f\n", *accountSummary.Payload.Result.TotalPl)
-	fmt.Printf("Equity : %f\n", *accountSummary.Payload.Result.Equity)
+	myAccount := account.Account{
+		Currency:       *accountSummary.Payload.Result.Currency,
+		AvailableFunds: *accountSummary.Payload.Result.AvailableFunds,
+		Balance:        *accountSummary.Payload.Result.Balance,
+		Equity:         *accountSummary.Payload.Result.Equity,
+		DeltaTotal:     *accountSummary.Payload.Result.DeltaTotal,
+		OptionsDelta:   *accountSummary.Payload.Result.OptionsDelta,
+		OptionsGamma:   *accountSummary.Payload.Result.OptionsGamma,
+		OptionsVega:    *accountSummary.Payload.Result.OptionsVega,
+		OptionsTheta:   *accountSummary.Payload.Result.OptionsTheta,
+		// *accountSummary.Payload.Result.SessionFunding)
+		FuturesPl: *accountSummary.Payload.Result.FuturesPl,
+		OptionsPl: *accountSummary.Payload.Result.OptionsPl,
+		TotalPl:   *accountSummary.Payload.Result.TotalPl,
+	}
 
+	fmt.Println(myAccount.Sprintf())
 	// --------------------
 	// 2. Referential
 	// --------------------
@@ -79,7 +83,23 @@ func main() {
 		log.Fatalf("Error loading referential: %s", errRef)
 	}
 	for key, value := range referential.Payload.Result {
-		fmt.Printf("Instrument :  %d %s %+v \n", key, value.InstrumentName, value)
+
+		myInstrument := instrument.Instrument{
+			BaseCurrency:        *value.BaseCurrency,
+			InstrumentName:      *&value.InstrumentName,
+			ContractSize:        *value.ContractSize,
+			ExpirationTimestamp: *value.ExpirationTimestamp,
+			IsActive:            *value.IsActive,
+			Kind:                value.Kind,
+			MinTradeAmount:      *value.MinTradeAmount,
+			OptionType:          value.OptionType,
+			QuoteCurrency:       *value.QuoteCurrency,
+			SettlementPeriod:    *value.SettlementPeriod,
+			Strike:              value.Strike,
+			TickSize:            *value.TickSize,
+		}
+
+		fmt.Println("Referential : \n", key, ":", myInstrument.Sprintf(), "\n")
 	}
 
 	// --------------------
@@ -95,9 +115,12 @@ func main() {
 	if errBook != nil {
 		log.Fatalf("Error loading book summary : %s", errBook)
 	}
+
+	// See v3/models/book_summary.go
 	for key, value := range bookSummary.Payload.Result {
-		fmt.Printf("Instrument price request :  %d %s %+v \n", key, value.InstrumentName, value)
+		fmt.Printf("Instrument price request : # %v \n %+v \n", key, value)
 	}
+
 	/*
 		// Buy
 		buyParams := &private.GetPrivateBuyParams{

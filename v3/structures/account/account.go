@@ -1,4 +1,8 @@
-package AccountData
+package account
+
+import (
+	"strconv"
+)
 
 type Account struct {
 	// The account's available funds
@@ -28,7 +32,7 @@ type Account struct {
 
 	// The account's current equity
 	// Required: true
-	Equity string // *float64 `json:"equity"`
+	Equity float64 // *float64 `json:"equity"`
 
 	// Futures profit and Loss
 	// Required: true
@@ -126,4 +130,22 @@ type Account struct {
 	// Account name (given by user) (available when parameter `extended` = `true`)
 	// Required: true
 	Username string // *string
+}
+
+func (pAccount Account) Sprintf() string {
+	var output string
+	output = "Currency: " + pAccount.Currency + "\n"
+	output += "Available funds:" + strconv.FormatFloat(pAccount.AvailableFunds, 'f', 2, 32) + "\n"
+	output += "Balance: " + strconv.FormatFloat(pAccount.Balance, 'f', 2, 32) + "\n"
+	output += "Equity : " + strconv.FormatFloat(pAccount.Equity, 'f', 2, 32) + "\n"
+	output += "Delta Total: " + strconv.FormatFloat(pAccount.DeltaTotal, 'f', 2, 32) + "\n"
+	output += "Options Delta: " + strconv.FormatFloat(pAccount.OptionsDelta, 'f', 2, 32) + "\n"
+	output += "Options Gamma: " + strconv.FormatFloat(pAccount.OptionsGamma, 'f', 2, 32) + "\n"
+	output += "Options Vega: " + strconv.FormatFloat(pAccount.OptionsVega, 'f', 2, 32) + "\n"
+	output += "Options Theta: " + strconv.FormatFloat(pAccount.OptionsTheta, 'f', 2, 32) + "\n"
+	// fmt.Printf("Session funding: %f\n", (*pAccount).SessionFunding)
+	output += "Futures PnL: " + strconv.FormatFloat(pAccount.FuturesPl, 'f', 2, 32) + "\n"
+	output += "Options PnL: " + strconv.FormatFloat(pAccount.OptionsPl, 'f', 2, 32) + "\n"
+	output += "Total PnL: " + strconv.FormatFloat(pAccount.TotalPl, 'f', 2, 32) + "\n"
+	return output
 }

@@ -4,8 +4,8 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/adampointer/go-deribit/client/operations"
-	"github.com/adampointer/go-deribit/models"
+	"github.com/tuanito/go-deribit/client/operations"
+	"github.com/tuanito/go-deribit/models"
 	"github.com/gorilla/websocket"
 )
 

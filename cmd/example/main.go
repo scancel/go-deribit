@@ -4,10 +4,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/adampointer/go-deribit/client/operations"
 	flag "github.com/spf13/pflag"
-
-	"github.com/adampointer/go-deribit"
+	"github.com/tuanito/go-deribit"
+	"github.com/tuanito/go-deribit/client/operations"
 )
 
 func main() {
@@ -32,6 +31,7 @@ func main() {
 	client := e.Client()
 	// Hit the test RPC endpoint
 	res, err := client.GetPublicTest(&operations.GetPublicTestParams{})
+
 	if err != nil {
 		log.Fatalf("Error testing connection: %s", err)
 	}
@@ -42,12 +42,14 @@ func main() {
 
 	// Account summary
 	summary, err := client.GetPrivateGetAccountSummary(&operations.GetPrivateGetAccountSummaryParams{Currency: "BTC"})
+
 	if err != nil {
 		log.Fatalf("Error getting account summary: %s", err)
 	}
 	fmt.Printf("Available funds: %f\n", *summary.Payload.Result.AvailableFunds)
 
 	// Buy
+
 	buyParams := &operations.GetPrivateBuyParams{
 		Amount:         10,
 		InstrumentName: "BTC-PERPETUAL",

@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/adampointer/go-deribit/client/operations"
+	"github.com/tuanito/go-deribit/client/operations"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 	"github.com/gorilla/websocket"

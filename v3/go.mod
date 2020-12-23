@@ -1,7 +1,7 @@
-module github.com/adampointer/go-deribit/v3
+module github.com/tuanito/go-deribit/v3
 
 require (
-	github.com/adampointer/go-deribit v3.1.1+incompatible // indirect
+	github.com/tuanito/go-deribit v3.1.1+incompatible // indirect
 	github.com/cenkalti/backoff v2.2.1+incompatible
 	github.com/go-openapi/analysis v0.19.7 // indirect
 	github.com/go-openapi/errors v0.19.3

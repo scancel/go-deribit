@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"math"
 
 	flag "github.com/spf13/pflag"
 	"github.com/tuanito/go-deribit/v3"
@@ -11,6 +12,7 @@ import (
 	"github.com/tuanito/go-deribit/v3/client/private"
 	"github.com/tuanito/go-deribit/v3/client/public"
 	"github.com/tuanito/go-deribit/v3/structures/account"
+	summary "github.com/tuanito/go-deribit/v3/structures/book"
 	"github.com/tuanito/go-deribit/v3/structures/instrument"
 	"github.com/tuanito/go-deribit/v3/structures/position"
 )
@@ -119,7 +121,33 @@ func main() {
 
 	// See v3/models/book_summary.go
 	for key, value := range bookSummary.Payload.Result {
-		fmt.Printf("Instrument price request : # %v \n %+v \n", key, value)
+		// fmt.Printf("Instrument raw price request : # %v \n %+v \n", key, value)
+		fmt.Printf("Instrument price request : # %v \n", key)
+		myBookSummary := summary.BookSummary{
+			AskPrice:               getNumber(value.AskPrice),
+			BaseCurrency:           *value.BaseCurrency,
+			BidPrice:               getNumber(value.BidPrice),
+			CreationTimestamp:      value.CreationTimestamp,
+			CurrentFunding:         value.CurrentFunding,
+			EstimatedDeliveryPrice: value.EstimatedDeliveryPrice,
+			Funding8h:              value.Funding8h,
+			High:                   getNumber(value.High),
+			InstrumentName:         value.InstrumentName,
+
+			InterestRate:    value.InterestRate,
+			Last:            getNumber(value.Last),
+			Low:             getNumber(value.Low),
+			MarkPrice:       getNumber(value.MarkPrice),
+			MidPrice:        getNumber(value.MidPrice),
+			OpenInterest:    *value.OpenInterest,
+			QuoteCurrency:   *value.QuoteCurrency,
+			UnderlyingIndex: value.UnderlyingIndex,
+			// underlying price for implied volatility calculations (options only)
+			UnderlyingPrice: value.UnderlyingPrice,
+			Volume:          *value.Volume,
+			VolumeUsd:       value.VolumeUsd,
+		}
+		fmt.Println(myBookSummary.Sprintf())
 	}
 
 	/*
@@ -206,4 +234,14 @@ func main() {
 
 func strPointer(str string) *string {
 	return &str
+}
+
+// getNumber will return NaN or the number, depending on the pointer
+func getNumber(pNumber *float64) float64 {
+	var output float64
+	output = math.NaN()
+	if pNumber != nil {
+		output = *pNumber
+	}
+	return output
 }

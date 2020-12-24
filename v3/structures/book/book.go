@@ -1,6 +1,10 @@
-package book
+package summary
 
-import "github.com/tuanito/go-deribit/v3/models"
+import (
+	"strconv"
+
+	"github.com/tuanito/go-deribit/v3/models"
+)
 
 // BookSummary TODO
 type BookSummary struct {
@@ -77,4 +81,30 @@ type BookSummary struct {
 
 	// Volume in usd (futures only)
 	VolumeUsd float64
+}
+
+// Sprintf is a printout of the BookSummary datastructure
+func (pBook BookSummary) Sprintf() string {
+	var output string
+	output += "InstrumentName : " + string(pBook.InstrumentName) + "\n"
+	output += "BaseCurrency : " + pBook.BaseCurrency + "\n"
+	output += "QuoteCurrency : " + string(pBook.QuoteCurrency) + "\n"
+	output += "BidPrice : " + strconv.FormatFloat(pBook.BidPrice, 'f', 6, 32) + "\n"
+	output += "MidPrice : " + strconv.FormatFloat(pBook.MidPrice, 'f', 6, 32) + "\n"
+	output += "AskPrice : " + strconv.FormatFloat(pBook.AskPrice, 'f', 6, 32) + "\n"
+	output += "MarkPrice : " + strconv.FormatFloat(pBook.MarkPrice, 'f', 6, 32) + "\n"
+	output += "Last : " + strconv.FormatFloat(pBook.Last, 'f', 6, 32) + "\n"
+	output += "High : " + strconv.FormatFloat(pBook.High, 'f', 6, 32) + "\n"
+	output += "Low : " + strconv.FormatFloat(pBook.Low, 'f', 6, 32) + "\n"
+	output += "CreationTimestamp: " + strconv.FormatInt(int64(pBook.CreationTimestamp), 10) + "\n"
+	output += "CurrentFunding : " + strconv.FormatFloat(pBook.CurrentFunding, 'f', 6, 32) + "\n"
+	output += "Funding8h : " + strconv.FormatFloat(pBook.Funding8h, 'f', 6, 32) + "\n"
+	output += "EstimatedDeliveryPrice : " + strconv.FormatFloat(pBook.EstimatedDeliveryPrice, 'f', 6, 32) + "\n"
+	output += "InterestRate : " + strconv.FormatFloat(pBook.InterestRate, 'f', 6, 32) + "\n"
+	output += "OpenInterest : " + strconv.FormatFloat(pBook.OpenInterest, 'f', 6, 32) + "\n"
+	output += "UnderlyingIndex : " + string(pBook.UnderlyingIndex) + "\n"
+	output += "UnderlyingPrice : " + strconv.FormatFloat(pBook.UnderlyingPrice, 'f', 6, 32) + "\n"
+	output += "Volume : " + strconv.FormatFloat(pBook.Volume, 'f', 6, 32) + "\n"
+	output += "VolumeUsd : " + strconv.FormatFloat(pBook.VolumeUsd, 'f', 6, 32) + "\n"
+	return output
 }

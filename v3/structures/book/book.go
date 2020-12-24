@@ -1,5 +1,8 @@
 package book
 
+import "github.com/tuanito/go-deribit/v3/models"
+
+// BookSummary TODO
 type BookSummary struct {
 
 	// The current best ask price, `null` if there aren't any asks
@@ -16,7 +19,7 @@ type BookSummary struct {
 
 	// creation timestamp
 	// Required: true
-	CreationTimestamp Timestamp
+	CreationTimestamp models.Timestamp
 
 	// Current funding (perpetual only)
 	CurrentFunding float64
@@ -33,7 +36,7 @@ type BookSummary struct {
 
 	// instrument name
 	// Required: true
-	InstrumentName InstrumentName
+	InstrumentName models.InstrumentName
 
 	// Interest rate used in implied volatility calculations (options only)
 	InterestRate float64

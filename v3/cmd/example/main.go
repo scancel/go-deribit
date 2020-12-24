@@ -12,6 +12,7 @@ import (
 	"github.com/tuanito/go-deribit/v3/client/public"
 	"github.com/tuanito/go-deribit/v3/structures/account"
 	"github.com/tuanito/go-deribit/v3/structures/instrument"
+	"github.com/tuanito/go-deribit/v3/structures/position"
 )
 
 func main() {
@@ -99,7 +100,7 @@ func main() {
 			TickSize:            *value.TickSize,
 		}
 
-		fmt.Println("Referential : \n", key, ":", myInstrument.Sprintf(), "\n")
+		fmt.Println("Referential : \n", key, ":", myInstrument.Sprintf())
 	}
 
 	// --------------------
@@ -143,12 +144,34 @@ func main() {
 		InstrumentName: "BTC-PERPETUAL",
 	}
 
-	position, errPos := client.Private.GetPrivateGetPosition(positionParams)
+	privatePosition, errPos := client.Private.GetPrivateGetPosition(positionParams)
 	if errPos != nil {
 		log.Fatalf("Error getting position : %s", errPos)
 	}
 
-	fmt.Printf("Position: %+v\n", position.Payload.Result /*positions.Payload.Result*/)
+	myPosition := position.Position{
+		AveragePrice:              *privatePosition.Payload.Result.AveragePrice,
+		AveragePriceUsd:           privatePosition.Payload.Result.AveragePriceUsd,
+		Delta:                     *privatePosition.Payload.Result.Delta,
+		Direction:                 privatePosition.Payload.Result.Direction,
+		EstimatedLiquidationPrice: privatePosition.Payload.Result.EstimatedLiquidationPrice,
+		FloatingProfitLoss:        *privatePosition.Payload.Result.FloatingProfitLoss,
+		FloatingProfitLossUsd:     privatePosition.Payload.Result.FloatingProfitLossUsd,
+		IndexPrice:                *privatePosition.Payload.Result.IndexPrice,
+		InitialMargin:             *privatePosition.Payload.Result.InitialMargin,
+		InstrumentName:            privatePosition.Payload.Result.InstrumentName,
+		Kind:                      privatePosition.Payload.Result.Kind,
+		MaintenanceMargin:         *privatePosition.Payload.Result.MaintenanceMargin,
+		MarkPrice:                 *privatePosition.Payload.Result.MarkPrice,
+		OpenOrdersMargin:          *privatePosition.Payload.Result.OpenOrdersMargin,
+		RealizedProfitLoss:        *privatePosition.Payload.Result.RealizedProfitLoss,
+		SettlementPrice:           *privatePosition.Payload.Result.SettlementPrice,
+		Size:                      *privatePosition.Payload.Result.Size,
+		SizeCurrency:              privatePosition.Payload.Result.SizeCurrency,
+		// TotalProfitLoss:           *privatePosition.TotalProfitLoss, // <-- should be here though BUG
+	}
+
+	fmt.Println("Position : ", myPosition.Sprintf())
 
 	// --------------------
 	// 5. Account positions

@@ -6,8 +6,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/adampointer/go-deribit/client/operations"
-	"github.com/adampointer/go-deribit/models"
+	"github.com/tuanito/go-deribit/client/operations"
+	"github.com/tuanito/go-deribit/models"
 )
 
 // SubscribeDeribitPriceIndex subscribes to the deribit_price_index.{index_name} channel

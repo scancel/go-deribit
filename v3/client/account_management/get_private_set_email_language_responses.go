@@ -13,7 +13,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	models "github.com/adampointer/go-deribit/v3/models"
+	models "github.com/tuanito/go-deribit/v3/models"
 )
 
 // GetPrivateSetEmailLanguageReader is a Reader for the GetPrivateSetEmailLanguage structure.

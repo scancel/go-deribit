@@ -13,6 +13,10 @@ func StrPointer(str string) *string {
 	return &str
 }
 
+func FloatPointer(pFloat float64) *float64 {
+	return &pFloat
+}
+
 // GetNumber will return NaN or the number, depending on the pointer
 func GetNumber(pNumber *float64) float64 {
 	var output float64

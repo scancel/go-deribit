@@ -21,10 +21,12 @@ type Instrument struct {
 	// The time when the instrument was first created (milliseconds)
 	// Required: true
 	CreationTimestamp int64
+	CreationTime      string
 
 	// The time when the instrument will expire (milliseconds)
 	// Required: true
 	ExpirationTimestamp int64
+	ExpirationTime      string
 
 	// instrument name
 	// Required: true
@@ -73,6 +75,7 @@ func (pInstrument Instrument) Sprintf() string {
 	output += "IsActive:" + strconv.FormatBool(pInstrument.IsActive) + "\n"
 	output += "Kind: " + string(pInstrument.Kind) + "\n"
 	output += "ExpirationTimestamp:" + strconv.FormatInt(pInstrument.ExpirationTimestamp, 10) + "\n"
+	output += "ExpirationTime:" + pInstrument.ExpirationTime + "\n"
 	output += "MinTradeAmount: " + strconv.FormatFloat(pInstrument.MinTradeAmount, 'f', 6, 32) + "\n"
 	output += "OptionType: " + pInstrument.OptionType + "\n"
 	output += "QuoteCurrency: " + pInstrument.QuoteCurrency + "\n"

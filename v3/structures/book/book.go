@@ -24,6 +24,7 @@ type BookSummary struct {
 	// creation timestamp
 	// Required: true
 	CreationTimestamp models.Timestamp
+	CreationTime      string
 
 	// Current funding (perpetual only)
 	CurrentFunding float64
@@ -97,6 +98,7 @@ func (pBook BookSummary) Sprintf() string {
 	output += "High : " + strconv.FormatFloat(pBook.High, 'f', 6, 32) + "\n"
 	output += "Low : " + strconv.FormatFloat(pBook.Low, 'f', 6, 32) + "\n"
 	output += "CreationTimestamp: " + strconv.FormatInt(int64(pBook.CreationTimestamp), 10) + "\n"
+	output += "CreationTime: " + pBook.CreationTime + "\n"
 	output += "CurrentFunding : " + strconv.FormatFloat(pBook.CurrentFunding, 'f', 6, 32) + "\n"
 	output += "Funding8h : " + strconv.FormatFloat(pBook.Funding8h, 'f', 6, 32) + "\n"
 	output += "EstimatedDeliveryPrice : " + strconv.FormatFloat(pBook.EstimatedDeliveryPrice, 'f', 6, 32) + "\n"

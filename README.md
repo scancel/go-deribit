@@ -4,10 +4,11 @@
 
 ## Forked code
 
-This code has been forked from adampointer/go-deribit original code. Maintenance is now done on this fork (as of 20201216). This code adds encapsulated functions which allow a more user-friendly use of Adampointer's fantastic original API.
+This code has been forked from adampointer/go-deribit original code. Maintenance is now taken overon this fork (as of 20201216). This code adds encapsulated functions which allow a more user-friendly use of Adampointer's fantastic original API.
 
 Here is a sample code:
-`
+
+``
 package main
 
 import (

@@ -8,7 +8,7 @@ This code has been forked from adampointer/go-deribit original code. Maintenance
 
 Here is a sample code:
 
-`package main
+``package main
 
 import (
 	"fmt"
@@ -159,7 +159,7 @@ func main() {
 	// buy, err := deribit.Buy(client, amount, instrumentName, price, orderType)
 
 	exchange.Close()
-}`
+}``
 
 ## V3 
 

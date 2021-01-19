@@ -2,6 +2,7 @@ package instrument
 
 import (
 	"strconv"
+	"time"
 
 	"github.com/tuanito/go-deribit/v3/models"
 )
@@ -21,12 +22,12 @@ type Instrument struct {
 	// The time when the instrument was first created (milliseconds)
 	// Required: true
 	CreationTimestamp int64
-	CreationTime      string
+	CreationTime      time.Time
 
 	// The time when the instrument will expire (milliseconds)
 	// Required: true
 	ExpirationTimestamp int64
-	ExpirationTime      string
+	ExpirationTime      time.Time
 
 	// instrument name
 	// Required: true
@@ -68,6 +69,7 @@ type Instrument struct {
 
 // Sprintf exports a string
 func (pInstrument Instrument) Sprintf() string {
+	gTimeFormat := "2006-01-02 15:04:05"
 	var output string
 	output += "BaseCurrency: " + pInstrument.BaseCurrency + "\n"
 	output += "InstrumentName: " + string(pInstrument.InstrumentName) + "\n"
@@ -75,7 +77,7 @@ func (pInstrument Instrument) Sprintf() string {
 	output += "IsActive:" + strconv.FormatBool(pInstrument.IsActive) + "\n"
 	output += "Kind: " + string(pInstrument.Kind) + "\n"
 	output += "ExpirationTimestamp:" + strconv.FormatInt(pInstrument.ExpirationTimestamp, 10) + "\n"
-	output += "ExpirationTime:" + pInstrument.ExpirationTime + "\n"
+	output += "ExpirationTime:" + pInstrument.ExpirationTime.Format(gTimeFormat) + "\n"
 	output += "MinTradeAmount: " + strconv.FormatFloat(pInstrument.MinTradeAmount, 'f', 6, 32) + "\n"
 	output += "OptionType: " + pInstrument.OptionType + "\n"
 	output += "QuoteCurrency: " + pInstrument.QuoteCurrency + "\n"

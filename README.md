@@ -1,10 +1,10 @@
-[![Build Status](https://travis-ci.com/adampointer/go-deribit.svg?branch=master)](https://travis-ci.com/adampointer/go-deribit)  [![Go Report Card](https://goreportcard.com/badge/github.com/adampointer/go-deribit)](https://goreportcard.com/report/github.com/adampointer/go-deribit)  [![codebeat badge](https://codebeat.co/badges/5bf32114-b7e1-4e70-91bf-fae2449fe2cb)](https://codebeat.co/projects/github-com-adampointer-go-deribit-master)
+[![Build Status](https://travis-ci.com/scancel/go-deribit.svg?branch=master)](https://travis-ci.com/scancel/go-deribit)  [![Go Report Card](https://goreportcard.com/badge/github.com/scancel/go-deribit)](https://goreportcard.com/report/github.com/scancel/go-deribit)  [![codebeat badge](https://codebeat.co/badges/5bf32114-b7e1-4e70-91bf-fae2449fe2cb)](https://codebeat.co/projects/github-com-scancel-go-deribit-master)
 
 # go-deribit
 
 ## Status
 
-This code has been forked from adampointer/go-deribit fantastic original code. Maintenance is now taken over on this fork (as of 20201216). This code adds encapsulated functions which allow a more trader-friendly use of the original API.
+This code has been forked from scancel/go-deribit fantastic original code. Maintenance is now taken over on this fork (as of 20201216). This code adds encapsulated functions which allow a more trader-friendly use of the original API.
 
 Here is a sample code:
 ```
@@ -15,8 +15,8 @@ import (
 	"log"
 
 	flag "github.com/spf13/pflag"
-	"github.com/tuanito/go-deribit/v3"
-	"github.com/tuanito/go-deribit/v3/client/public"
+	"github.com/scancel/go-deribit/v3"
+	"github.com/scancel/go-deribit/v3/client/public"
 )
 
 func main() {
@@ -166,13 +166,13 @@ func main() {
 
 This project is now using go1.13 with Go Modules, but should remain compatible with `dep`. Also, as there are some breaking changes introduced by the latest schema changes from the remote API, I have decided to carry on development in the new `v3` namespace with the project root containing the code tagged `v2.x`.
 
-`import "github.com/tuanito/go-deribit/v3"`
+`import "github.com/scancel/go-deribit/v3"`
 
 We now have the latest API methods which were recently released such as `public/get_tradingview_chart_data`.
 
 Only the`v3` directory will benefit from onward development.`
 
-[GoDoc API Documentation](https://godoc.org/github.com/adampointer/go-deribit/v3)
+[GoDoc API Documentation](https://godoc.org/github.com/scancel/go-deribit/v3)
 
 ## Overview
 
@@ -185,7 +185,7 @@ This library is a port of the [official wrapper libraries](https://github.com/de
 If you wish to try it out, be kind and use my affiliate link [https://www.deribit.com/reg-3027.8327](https://www.deribit.com/reg-3027.8327)
 
 
-*p.s.* If you want a good BitMEX client library then try [go-bitmex](https://github.com/adampointer/go-bitmex)
+*p.s.* If you want a good BitMEX client library then try [go-bitmex](https://github.com/scancel/go-bitmex)
 
 [V2 API Documentation](http://docs.deribit.com/v2/?javascript#deribit-api-v2-0-0)
 

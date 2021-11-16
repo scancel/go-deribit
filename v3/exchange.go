@@ -8,9 +8,9 @@ import (
 	"log"
 	"time"
 
-	"github.com/tuanito/go-deribit/v3/client"
-	"github.com/tuanito/go-deribit/v3/client/private"
-	"github.com/tuanito/go-deribit/v3/client/public"
+	"github.com/scancel/go-deribit/v3/client"
+	"github.com/scancel/go-deribit/v3/client/private"
+	"github.com/scancel/go-deribit/v3/client/public"
 	"github.com/cenkalti/backoff"
 	"github.com/go-openapi/strfmt"
 	"github.com/gorilla/websocket"

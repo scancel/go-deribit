@@ -7,13 +7,13 @@ import (
 	"os"
 	"testing"
 
-	"github.com/tuanito/go-deribit/v3/client/account_management"
-	"github.com/tuanito/go-deribit/v3/client/market_data"
-	"github.com/tuanito/go-deribit/v3/client/public"
-	"github.com/tuanito/go-deribit/v3/client/supporting"
+	"github.com/scancel/go-deribit/v3/client/account_management"
+	"github.com/scancel/go-deribit/v3/client/market_data"
+	"github.com/scancel/go-deribit/v3/client/public"
+	"github.com/scancel/go-deribit/v3/client/supporting"
 
-	"github.com/tuanito/go-deribit/v3/client"
-	"github.com/tuanito/go-deribit/v3/client/websocket_only"
+	"github.com/scancel/go-deribit/v3/client"
+	"github.com/scancel/go-deribit/v3/client/websocket_only"
 	"github.com/iancoleman/strcase"
 	"github.com/stretchr/testify/assert"
 )

@@ -6,16 +6,16 @@ import (
 	"strings"
 	"time"
 
-	"github.com/tuanito/go-deribit/v3/client"
-	"github.com/tuanito/go-deribit/v3/client/account_management"
-	"github.com/tuanito/go-deribit/v3/client/market_data"
-	"github.com/tuanito/go-deribit/v3/client/private"
-	"github.com/tuanito/go-deribit/v3/client/public"
-	"github.com/tuanito/go-deribit/v3/structures/account"
-	"github.com/tuanito/go-deribit/v3/structures/book"
-	"github.com/tuanito/go-deribit/v3/structures/instrument"
-	"github.com/tuanito/go-deribit/v3/structures/position"
-	"github.com/tuanito/go-deribit/v3/utils"
+	"github.com/scancel/go-deribit/v3/client"
+	"github.com/scancel/go-deribit/v3/client/account_management"
+	"github.com/scancel/go-deribit/v3/client/market_data"
+	"github.com/scancel/go-deribit/v3/client/private"
+	"github.com/scancel/go-deribit/v3/client/public"
+	"github.com/scancel/go-deribit/v3/structures/account"
+	"github.com/scancel/go-deribit/v3/structures/book"
+	"github.com/scancel/go-deribit/v3/structures/instrument"
+	"github.com/scancel/go-deribit/v3/structures/position"
+	"github.com/scancel/go-deribit/v3/utils"
 )
 
 // Renew login 10 minutes before we have to

@@ -13,7 +13,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	models "github.com/tuanito/go-deribit/v3/models"
+	models "github.com/scancel/go-deribit/v3/models"
 )
 
 // GetPrivateCancelAllByInstrumentReader is a Reader for the GetPrivateCancelAllByInstrument structure.

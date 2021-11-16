@@ -11,15 +11,15 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/tuanito/go-deribit/v3/client/account_management"
-	"github.com/tuanito/go-deribit/v3/client/internal"
-	"github.com/tuanito/go-deribit/v3/client/market_data"
-	"github.com/tuanito/go-deribit/v3/client/private"
-	"github.com/tuanito/go-deribit/v3/client/public"
-	"github.com/tuanito/go-deribit/v3/client/supporting"
-	"github.com/tuanito/go-deribit/v3/client/trading"
-	"github.com/tuanito/go-deribit/v3/client/wallet"
-	"github.com/tuanito/go-deribit/v3/client/websocket_only"
+	"github.com/scancel/go-deribit/v3/client/account_management"
+	"github.com/scancel/go-deribit/v3/client/internal"
+	"github.com/scancel/go-deribit/v3/client/market_data"
+	"github.com/scancel/go-deribit/v3/client/private"
+	"github.com/scancel/go-deribit/v3/client/public"
+	"github.com/scancel/go-deribit/v3/client/supporting"
+	"github.com/scancel/go-deribit/v3/client/trading"
+	"github.com/scancel/go-deribit/v3/client/wallet"
+	"github.com/scancel/go-deribit/v3/client/websocket_only"
 )
 
 // Default deribit HTTP client.

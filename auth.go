@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/tuanito/go-deribit/client/operations"
+	"github.com/scancel/go-deribit/client/operations"
 )
 
 // Renew login 10 minutes before we have to

@@ -3,7 +3,7 @@ package book
 import (
 	"strconv"
 
-	"github.com/tuanito/go-deribit/v3/models"
+	"github.com/scancel/go-deribit/v3/models"
 )
 
 // BookSummary TODO

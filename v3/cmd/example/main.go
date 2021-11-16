@@ -5,8 +5,8 @@ import (
 	"log"
 
 	flag "github.com/spf13/pflag"
-	"github.com/tuanito/go-deribit/v3"
-	"github.com/tuanito/go-deribit/v3/client/public"
+	"github.com/scancel/go-deribit/v3"
+	"github.com/scancel/go-deribit/v3/client/public"
 )
 
 func main() {

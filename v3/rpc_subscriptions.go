@@ -6,9 +6,9 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/tuanito/go-deribit/v3/client/private"
-	"github.com/tuanito/go-deribit/v3/client/public"
-	"github.com/tuanito/go-deribit/v3/models"
+	"github.com/scancel/go-deribit/v3/client/private"
+	"github.com/scancel/go-deribit/v3/client/public"
+	"github.com/scancel/go-deribit/v3/models"
 )
 
 // SubscribeTicker subscribes to the ticker.{instrument_name}.{interval} channel

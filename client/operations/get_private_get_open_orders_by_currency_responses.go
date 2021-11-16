@@ -13,7 +13,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	models "github.com/tuanito/go-deribit/models"
+	models "github.com/scancel/go-deribit/models"
 )
 
 // GetPrivateGetOpenOrdersByCurrencyReader is a Reader for the GetPrivateGetOpenOrdersByCurrency structure.

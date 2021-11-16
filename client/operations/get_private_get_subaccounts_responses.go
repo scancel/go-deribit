@@ -13,7 +13,7 @@ import (
 
 	strfmt "github.com/go-openapi/strfmt"
 
-	models "github.com/tuanito/go-deribit/models"
+	models "github.com/scancel/go-deribit/models"
 )
 
 // GetPrivateGetSubaccountsReader is a Reader for the GetPrivateGetSubaccounts structure.

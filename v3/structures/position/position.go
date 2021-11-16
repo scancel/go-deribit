@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/tuanito/go-deribit/v3/models"
+	"github.com/scancel/go-deribit/v3/models"
 )
 
 // Position is almost the same struct as in v3/models/position.go

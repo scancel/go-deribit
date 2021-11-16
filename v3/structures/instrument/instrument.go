@@ -3,7 +3,7 @@ package instrument
 import (
 	"strconv"
 
-	"github.com/tuanito/go-deribit/v3/models"
+	"github.com/scancel/go-deribit/v3/models"
 )
 
 // Instrument is a slightly modified version of models.Instrument in v3/models/instrument.go

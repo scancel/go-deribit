@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tuanito/go-deribit/v3/models"
+	"github.com/scancel/go-deribit/v3/models"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 	"github.com/gorilla/websocket"

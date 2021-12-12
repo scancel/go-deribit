@@ -2,16 +2,17 @@ package main
 
 import (
 	"fmt"
-	"log"
-
-	flag "github.com/spf13/pflag"
 	"github.com/scancel/go-deribit/v3"
 	"github.com/scancel/go-deribit/v3/client/public"
+	flag "github.com/spf13/pflag"
+	"log"
+	"math"
+	"time"
 )
 
 func main() {
-	key := flag.String("access-key", "", "Access key")
-	secret := flag.String("secret-key", "", "Secret access key")
+	key := flag.String("key", "", "Access key")
+	secret := flag.String("secret", "", "Secret access key")
 	flag.Parse()
 	errs := make(chan error)
 	stop := make(chan bool)
@@ -40,95 +41,15 @@ func main() {
 	if err := exchange.Authenticate(*key, *secret); err != nil {
 		log.Fatalf("Error authenticating: %s", err)
 	}
+	var updatedPrice float64 = 20000
 
-	// --------------------
-	// 1. Account Summary
-	// --------------------
-
-	fmt.Println("---------------")
-	fmt.Println("Account summary BTC")
-	fmt.Println("---------------")
-	BtcAccount, errAcctBtc := deribit.GetAccountSummary(client, "BTC")
-	if errAcctBtc != nil {
-		log.Fatalf("Error getting account summary: %s", errAcctBtc)
-	}
-	BtcAccount.Sprintf()
-	fmt.Println("---------------")
-	fmt.Println("Account summary ETH")
-	fmt.Println("---------------")
-	EthAccount, errAcctEth := deribit.GetAccountSummary(client, "ETH")
-	if errAcctEth != nil {
-		log.Fatalf("Error getting account summary: %s", errAcctEth)
-	}
-	EthAccount.Sprintf()
-
-	// --------------------
-	// 2. Referential
-	// --------------------
-	btcReferential, _ := deribit.GetReferential(client, "BTC")
-	ethReferential, _ := deribit.GetReferential(client, "ETH")
-
-	fmt.Println("---------------")
-	fmt.Println("Referential BTC")
-	fmt.Println("---------------")
-	for key, value := range btcReferential {
-		fmt.Println("#", key, ":\n", value.Sprintf())
-	}
-	fmt.Println("---------------")
-	fmt.Println("Referential ETH")
-	fmt.Println("---------------")
-	for key, value := range ethReferential {
-		fmt.Println("# ", key, ":\n", value.Sprintf())
+	NewOrder, errNewOrder := deribit.Buy(client, 100, "BTC-PERPETUAL", 20000, "limit")
+	if errNewOrder != nil {
+		log.Fatalf("Error creating new order: %s", errNewOrder)
 	}
 
-	// --------------------
-	// 3. Book Summary
-	// Makes a snapshot of prices on all derivatives
-	// --------------------
 
-	currency := "BTC"
-	fmt.Println("Book Summary ", currency)
-	fmt.Println("------------------")
-	bookSummaries, _ := deribit.GetBookSummary(client, currency)
-
-	for key, value := range bookSummaries {
-		fmt.Println("Book summary :", key, " ", value.Sprintf())
-	}
-
-	// --------------------
-	// 4. Account position for a specific underlying
-	// --------------------
-	// see v3/models/position.go && v3/client/private/private_client.go
-	fmt.Println("Account Position")
-	fmt.Println("------------------")
-	pInstrumentName := "BTC-PERPETUAL"
-	accountPosition, _ := deribit.GetAccountPosition(client, pInstrumentName)
-
-	fmt.Println("Position of ", pInstrumentName)
-	accountPosition.Sprintf()
-
-	// --------------------
-	// 5. Account positions for a kind of underlyings
-	// --------------------
-	fmt.Println("Account Positions")
-	fmt.Println("------------------")
-	futureType := "FUTURE" // option
-	optionType := "OPTION" // option
-	futuresPositions, _ := deribit.GetAccountPositions(client, currency, futureType)
-	optionPositions, _ := deribit.GetAccountPositions(client, currency, optionType)
-
-	for key, value := range futuresPositions {
-		fmt.Println("FUTURES Position: #", key, " ", value.Sprintf())
-	}
-
-	for key, value := range optionPositions {
-		fmt.Println("OPTION Position: #", key, " ", value.Sprintf())
-	}
-
-	// --------------------
-	// 6. Order book subscription (market data)
-	// --------------------
-	depth := "1"
+	depth := "20"
 	interval := "100ms"
 	book, err := exchange.SubscribeBookGroup("BTC-PERPETUAL", "none", depth, interval)
 	if err != nil {
@@ -136,17 +57,18 @@ func main() {
 	}
 	for b := range book {
 		fmt.Printf("Top bid: %f Top ask: %f\n", b.Bids[0][0], b.Asks[0][0])
+		updatedPrice = math.Round(b.Bids[0][0])
+		if errNewOrder == nil {
+			start := time.Now()
+			_, errEditOrder := deribit.Edit(client, string(NewOrder.Payload.Result.Order.OrderID), 100, updatedPrice/2)
+			if errEditOrder != nil {
+				log.Fatalf("Error editing order: %s", errEditOrder)
+			}
+			dur := time.Since(start)
+			fmt.Printf("Edit order took %0d to execute", dur.Milliseconds())
+			//print(EditedOrder)
+		}
 	}
-
-	// --------------------
-	// 7. Transaction
-	// --------------------
-	// This has not been tried yet
-	// amount := 0.0001
-	// instrumentName := "BTC-PERPETUAL"
-	// price := 12532.0
-	// orderType := "limit" // "market"
-	// buy, err := deribit.Buy(client, amount, instrumentName, price, orderType)
 
 	exchange.Close()
 }

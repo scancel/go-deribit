@@ -11,6 +11,7 @@ import (
 	"github.com/scancel/go-deribit/v3/client/market_data"
 	"github.com/scancel/go-deribit/v3/client/private"
 	"github.com/scancel/go-deribit/v3/client/public"
+	"github.com/scancel/go-deribit/v3/client/trading"
 	"github.com/scancel/go-deribit/v3/structures/account"
 	"github.com/scancel/go-deribit/v3/structures/book"
 	"github.com/scancel/go-deribit/v3/structures/instrument"
@@ -243,6 +244,20 @@ func GetAccountPositions(pClient *client.Deribit, pCurrency string, pKind string
 	return outputPositions, errPos
 }
 
+func Edit(pClient *client.Deribit, pOrderID string, pAmount float64, pPrice float64) (*trading.GetPrivateEditOK, error) {
+	editParams := &trading.GetPrivateEditParams{
+		OrderID: 		pOrderID,
+		Amount:         pAmount,
+		Price:          pPrice,
+	}
+	edit, err := pClient.Trading.GetPrivateEdit(editParams)
+	if err != nil {
+		log.Fatalf("Error submitting edit order: %s", err)
+	}
+	fmt.Printf("BOT %s %f %f at %f\n", pOrderID, pAmount, pPrice, edit.Payload.Result.Order.AveragePrice)
+	return edit, err
+}
+
 // Buy a derivatives : example : Buy(10, "BTC-PERPETUAL", "market")
 // This has not been tried yet.
 // pOrderType : "limit" or "market"
@@ -268,7 +283,7 @@ func Buy(pClient *client.Deribit, pAmount float64, pInstrumentName string, pPric
 	if err != nil {
 		log.Fatalf("Error submitting buy order: %s", err)
 	}
-	fmt.Printf("BOT %f %s at %f\n", pAmount, pInstrumentName, buy.Payload.Result.Order.AveragePrice)
+	fmt.Printf("BOT %f %s at %f\n", pAmount, pInstrumentName, buy.Payload.Result.Order.Price)
 	return buy, err
 }
 
@@ -285,6 +300,6 @@ func Sell(pClient *client.Deribit, pAmount float64, pInstrumentName string, pPri
 	if err != nil {
 		log.Fatalf("Error submitting sell order: %s", err)
 	}
-	fmt.Printf("SOLD %f %s at %f\n", pAmount, pInstrumentName, sell.Payload.Result.Order.AveragePrice)
+	fmt.Printf("SOLD %f %s at %f\n", pAmount, pInstrumentName, sell.Payload.Result.Order.Price)
 	return sell, err
 }

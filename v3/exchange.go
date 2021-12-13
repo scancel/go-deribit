@@ -8,16 +8,16 @@ import (
 	"log"
 	"time"
 
-	"github.com/scancel/go-deribit/v3/client"
-	"github.com/scancel/go-deribit/v3/client/private"
-	"github.com/scancel/go-deribit/v3/client/public"
 	"github.com/cenkalti/backoff"
 	"github.com/go-openapi/strfmt"
 	"github.com/gorilla/websocket"
+	"github.com/scancel/go-deribit/v3/client"
+	"github.com/scancel/go-deribit/v3/client/private"
+	"github.com/scancel/go-deribit/v3/client/public"
 )
 
 const (
-	liveURL = "wss://www.deribit.com/ws/api/v2/"
+	liveURL = "wss://gateway.deribit.com/ws/api/v2/"
 	testURL = "wss://test.deribit.com/ws/api/v2/"
 )
 
